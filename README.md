@@ -1,16 +1,69 @@
-# React + Vite
+# Todo App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A todo list app built with React, Vite, and Tailwind CSS — my first React project, put together to get comfortable with state, components, and persisting data in the browser.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Add new todos
+- Mark todos as complete or incomplete
+- Delete todos
+- Todos stick around after a page refresh, thanks to a custom `useLocalStorage` hook
 
-## React Compiler
+## Tech stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- Vite
+- Tailwind CSS
+- JavaScript
 
-## Expanding the ESLint configuration
+## Project structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+src/
+├── components/
+│   ├── TaskInput.jsx   # the input field and add button
+│   ├── TaskItem.jsx    # a single todo row: checkbox, text, delete button
+│   └── TaskList.jsx    # renders the full list of TaskItem components
+├── hooks/
+│   └── useLocalStorage  # custom hook that syncs state with localStorage
+├── App.jsx              # main component, holds the shared todos state
+├── App.css
+├── index.css
+└── main.jsx
+
+## Getting started
+
+Clone the repo and install dependencies:
+
+```bash
+git clone https://github.com/your-username/todo-app-react.git
+cd todo-app-react
+npm install
+```
+
+Start the dev server:
+
+```bash
+npm run dev
+```
+
+Then open the URL shown in your terminal, usually `http://localhost:5173`.
+
+## What I learned
+
+Building this taught me a lot as someone just getting started with React:
+
+- How `useState` works, and how to think about "what data actually changes" before writing any UI
+- How to break a page into smaller components (`TaskInput`, `TaskItem`, `TaskList`) and pass data and functions between them with props
+- Why state updates in React need to be immutable — using the spread operator, `.map()`, and `.filter()` instead of directly changing an array
+- How to write a custom hook (`useLocalStorage`) so I wasn't repeating the same `useEffect` and `localStorage` logic everywhere
+- Styling with Tailwind CSS directly in JSX using utility classes, instead of writing separate CSS files
+
+## Future improvements
+
+- Let users edit an existing todo instead of only adding or deleting
+- Add filters to view all, active, or completed todos
+- Add due dates or priority tags to todos
+
+## Author
+
+Built by me while learning React — feedback and suggestions are always welcome.

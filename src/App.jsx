@@ -5,21 +5,30 @@ import useLocalStorage from './hooks/useLocalStorage';
 function App() {
   const [tasks, setTasks] = useLocalStorage("myTasks", []);
 
-  function handleAdd(taskText) {
+  const handleAdd = (taskText) => {
     setTasks([...tasks, {id: crypto.randomUUID(), text: taskText, completed: false }]);
-  }
+  };
 
-  function handleToggle(id) {
+  const handleToggle = (id) => {
     setTasks(
       tasks.map((task) =>
         task.id === id ? { ...task, completed: !task.completed } : task
       )
     );
-  }
+  };
 
-  function handleDelete(id) {
+  const handleDelete = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
-  }
+  };
+
+const handleEdit = (id, newText) => {
+  setTasks(
+    tasks.map((task) =>
+      task.id === id ? { ...task, text: newText } : task
+    )
+  );
+};
+
 
   return (
     <div className="min-h-screen bg-slate-50 p-6">
@@ -30,6 +39,7 @@ function App() {
           tasks={tasks} 
           onToggle={handleToggle} 
           onDelete={handleDelete} 
+          onEdit={handleEdit}
         />
       </div>
     </div>

@@ -1,6 +1,6 @@
 import TaskItem from "./TaskItem";
 
-function TaskList({ tasks, onToggle, onDelete }) {
+function TaskList({ tasks, onToggle, onDelete, onEdit }) {
   return (
     <ul>
       {tasks.map((task) => (
@@ -9,6 +9,8 @@ function TaskList({ tasks, onToggle, onDelete }) {
           task={task}
           onToggle={() => onToggle(task.id)}
           onDelete={() => onDelete(task.id)}
+          onEdit = {(newText) => onEdit(task.id, newText)}
+    
         />
       ))}
     </ul>

@@ -6,19 +6,19 @@ function App() {
   const [tasks, setTasks] = useLocalStorage("myTasks", []);
 
   function handleAdd(taskText) {
-    setTasks([...tasks, { text: taskText, completed: false }]);
+    setTasks([...tasks, {id: crypto.randomUUID(), text: taskText, completed: false }]);
   }
 
-  function handleToggle(index) {
+  function handleToggle(id) {
     setTasks(
-      tasks.map((task, i) =>
-        i === index ? { ...task, completed: !task.completed } : task
+      tasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
       )
     );
   }
 
-  function handleDelete(index) {
-    setTasks(tasks.filter((task, i) => i !== index));
+  function handleDelete(id) {
+    setTasks(tasks.filter((task) => task.id !== id));
   }
 
   return (

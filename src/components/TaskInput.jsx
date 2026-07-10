@@ -22,7 +22,7 @@ function TaskInput({onAdd}) {
     }
   }}
   placeholder="Add a new task..."
-  className="border p-2 rounded grow outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all"
+  className="border p-2 rounded grow min-w-0 : outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all"
 />
 
       <button 

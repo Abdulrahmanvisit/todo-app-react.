@@ -3,12 +3,12 @@ import TaskItem from "./TaskItem";
 function TaskList({ tasks, onToggle, onDelete }) {
   return (
     <ul>
-      {tasks.map((task, index) => (
+      {tasks.map((task) => (
         <TaskItem
-          key={index}
+          key={task.id}
           task={task}
-          onToggle={() => onToggle(index)}
-          onDelete={() => onDelete(index)}
+          onToggle={() => onToggle(task.id)}
+          onDelete={() => onDelete(task.id)}
         />
       ))}
     </ul>

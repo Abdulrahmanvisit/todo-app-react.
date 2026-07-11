@@ -1,13 +1,15 @@
 # Todo App
 
-A todo list app built with React, Vite, and Tailwind CSS — my first React project, put together to get comfortable with state, components, and persisting data in the browser.
+A todo list app built with React, Vite, and Tailwind CSS. Started as a simple add/delete list and grew into a fuller task manager with editing, filtering, due dates, and priority levels — built step by step while learning React fundamentals.
 
 ## Features
 
-- Add new todos
-- Mark todos as complete or incomplete
-- Delete todos
-- Todos stick around after a page refresh, thanks to a custom `useLocalStorage` hook
+- Add tasks with an optional due date and priority level (low, normal, high)
+- Edit a task's text in place
+- Mark tasks as complete or incomplete
+- Delete tasks
+- Filter tasks by All, Active, or Completed
+- Tasks persist across page refreshes using a custom `useLocalStorage` hook
 
 ## Tech stack
 
@@ -17,25 +19,26 @@ A todo list app built with React, Vite, and Tailwind CSS — my first React proj
 - JavaScript
 
 ## Project structure
-
+```
 src/
 ├── components/
-│   ├── TaskInput.jsx   # the input field and add button
-│   ├── TaskItem.jsx    # a single todo row: checkbox, text, delete button
-│   └── TaskList.jsx    # renders the full list of TaskItem components
+│   ├── TaskInput.jsx
+│   ├── TaskItem.jsx
+│   └── TaskList.jsx
 ├── hooks/
-│   └── useLocalStorage  # custom hook that syncs state with localStorage
-├── App.jsx              # main component, holds the shared todos state
+│   └── useLocalStorage
+├── App.jsx
 ├── App.css
 ├── index.css
 └── main.jsx
+```
 
 ## Getting started
 
 Clone the repo and install dependencies:
 
 ```bash
-git clone https://github.com/your-username/todo-app-react.git
+git clone https://github.com/Abdulrahmanvisit/todo-app-react.git
 cd todo-app-react
 npm install
 ```
@@ -50,19 +53,20 @@ Then open the URL shown in your terminal, usually `http://localhost:5173`.
 
 ## What I learned
 
-Building this taught me a lot as someone just getting started with React:
-
-- How `useState` works, and how to think about "what data actually changes" before writing any UI
-- How to break a page into smaller components (`TaskInput`, `TaskItem`, `TaskList`) and pass data and functions between them with props
-- Why state updates in React need to be immutable — using the spread operator, `.map()`, and `.filter()` instead of directly changing an array
-- How to write a custom hook (`useLocalStorage`) so I wasn't repeating the same `useEffect` and `localStorage` logic everywhere
-- Styling with Tailwind CSS directly in JSX using utility classes, instead of writing separate CSS files
+- How to use `useState` to manage data that changes over time, and how to decide what actually needs its own state versus what can be derived
+- How to give list items a stable, unique `id` (via `crypto.randomUUID()`) instead of relying on their position in an array — necessary once filtering or reordering is involved
+- How to build a reusable custom hook (`useLocalStorage`) so state and persistence logic aren't duplicated across the app
+- How to break a UI into small, focused components (`TaskInput`, `TaskItem`, `TaskList`) and pass data and functions down through props, following a consistent pattern for how changes flow back up
+- How to update arrays immutably using the spread operator, `.map()`, and `.filter()`, instead of mutating state directly
+- How to compute a derived value (the filtered, visible task list) fresh on every render instead of storing it as separate state
+- How to debug real issues methodically: reading error messages carefully, checking `git diff` before committing, and isolating changes on a feature branch before merging
 
 ## Future improvements
 
-- Let users edit an existing todo instead of only adding or deleting
-- Add filters to view all, active, or completed todos
-- Add due dates or priority tags to todos
+- Sort tasks by due date or priority
+- Show a count of remaining active tasks
+- Add a "clear all completed" button
+- Add basic form validation and feedback (e.g. warn on a past due date)
 
 ## Author
 

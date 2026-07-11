@@ -12,8 +12,8 @@ function App() {
 
   const[filter, setFilter] = useState("all");
 
-  const handleAdd = (taskText) => {
-    setTasks([...tasks, {id: crypto.randomUUID(), text: taskText, completed: false }]);
+  const handleAdd = (newText) => {
+    setTasks([...tasks, {id: crypto.randomUUID(), completed: false, ...newText }]);
   };
 
   const handleToggle = (id) => {
@@ -49,12 +49,32 @@ const visibleTasks = tasks.filter((task) => {
         <h1 className="mb-4 text-2xl font-semibold">Todo APP</h1>
         <TaskInput onAdd={handleAdd} />
 
-        <div className='flex gap-2 mb-2'>
-          <button onClick={() => setFilter("All")}>All</button>
-          <button onClick={() => setFilter("Active")}>Active</button>
-          <button onClick={() => setFilter("Completed")}>Completed</button>
-
-        </div>
+        <div className="flex gap-2 mb-4">
+  <button
+    onClick={() => setFilter("all")}
+    className={`px-3 py-1 rounded text-sm font-medium ${
+      filter === "all" ? "bg-orange-500 text-white" : "bg-slate-100 text-slate-600"
+    }`}
+  >
+    All
+  </button>
+  <button
+    onClick={() => setFilter("active")}
+    className={`px-3 py-1 rounded text-sm font-medium ${
+      filter === "active" ? "bg-orange-500 text-white" : "bg-slate-100 text-slate-600"
+    }`}
+  >
+    Active
+  </button>
+  <button
+    onClick={() => setFilter("completed")}
+    className={`px-3 py-1 rounded text-sm font-medium ${
+      filter === "completed" ? "bg-orange-500 text-white" : "bg-slate-100 text-slate-600"
+    }`}
+  >
+    Completed
+  </button>
+</div>
         
         <TaskList 
           tasks={visibleTasks} 

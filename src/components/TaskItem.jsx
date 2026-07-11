@@ -11,7 +11,7 @@ function TaskItem({ task, onToggle, onDelete, onEdit }) {
   }
 
   return (
-    <li className="flex item-center justify-between px-4 py-3 mb-4 bg-slate-50">
+    <li className="flex items-center justify-between px-4 py-3 mb-4 bg-slate-50">
       {/* ── Ternary start: switches between edit mode and display mode ── */}
       {isEditing ? (
         // ── "true" branch: shown when isEditing is true ──
@@ -26,12 +26,26 @@ function TaskItem({ task, onToggle, onDelete, onEdit }) {
         // ── end of "true" branch ──
       ) : (
         // ── "false" branch: shown when isEditing is false ──
-        <span
-          onClick={onToggle}
-          className={`cursor-pointer grow ${task.completed ? "line-through text-slate-400" : "text-slate-800"}`}
-        >
-          {task.text}
-        </span>
+        <div className="flex flex-col grow">
+          <span
+            onClick={onToggle}
+            className={`cursor-pointer ${task.completed ? "line-through text-slate-400" : "text-slate-800"}`}
+          >
+            {task.text}
+          </span>
+          <div className="flex gap-2 text-xs text-slate-400 mt-1">
+            {task.dueDate && <span>Due {task.dueDate}</span>}
+            {task.priority && task.priority !== "normal" && (
+              <span
+                className={`px-2 py-0.5 rounded-full font-medium ${
+                  task.priority === "high" ? "bg-red-100 text-red-600" : "bg-blue-100 text-blue-600"
+                }`}
+              >
+                {task.priority}
+              </span>
+            )}
+          </div>
+        </div>
         // ── end of "false" branch ──
       )}
       {/* ── Ternary end. Nothing task-editing-related goes below this line — 
